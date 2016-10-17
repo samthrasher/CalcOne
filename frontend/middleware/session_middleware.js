@@ -1,24 +1,24 @@
-import {LOGIN, LOGOUT, SIGN_UP, receiveCurrentUser, receiveErrors} from '../actions/auth_actions.js';
+import {receiveCurrentUser, receiveErrors} from '../actions/auth_actions.js';
 import SessionAPI from '../util/session_api_util.js';
 
 const sessionMiddleware = ({getState, dispatch}) => next => action => {
 
   switch (action.type) {
-    case LOGIN:
+    case 'LOGIN':
       SessionAPI.login(
         action.user,
         user => dispatch(receiveCurrentUser(user)),
         errors => dispatch(receiveErrors(errors))
       );
       break;
-    case SIGN_UP:
+    case 'SIGN_UP':
       SessionAPI.signUp(
         action.user,
         user => dispatch(receiveCurrentUser(user)),
         errors => dispatch(receiveErrors(errors))
       );
       break;
-    case LOGOUT: {
+    case 'LOGOUT': {
       const _next = () => next(action);
       SessionAPI.logout(_next, _next);
       break;

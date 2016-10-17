@@ -7,6 +7,9 @@ const defaultState = {
       currentUser: window.currentUser,
       errors: []
     },
+  applicationState: {
+    loginModalIsOpen: false
+  }
 };
 
 export const configureStore = (preloadedState = defaultState) => createStore(
